@@ -16,6 +16,10 @@
   font-size: 16px;
   -webkit-touch-callout: none;
 }
+body{
+  background-position: -2;
+  overflow-x: hidden;
+}
 
 .ocean {
   height: 5%;
@@ -34,6 +38,7 @@
   height: 198px;
   animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
+  z-index: -1;
 }
 
 .wave:nth-of-type(2) {
@@ -64,6 +69,23 @@
   padding: 20px;
 }
 
+.title-section {
+  margin-bottom: 20px;
+}
+
+.content-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.credit-box {
+  width: 50%;
+}
+
+.video-section {
+  width: 50%;
+}
+
 h1 {
   font-size: 2em;
   margin-bottom: 20px;
@@ -77,6 +99,7 @@ h1 {
 }
 
 .credit-item {
+  z-index: 3;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -100,4 +123,5 @@ h1 {
 
 .video-section {
   margin-top: 20px;
+  text-align: center;
 }
