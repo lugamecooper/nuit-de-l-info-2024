@@ -1,6 +1,6 @@
 1.  <?php
 
-<link href="style.css" rel="stylesheet" />
+<link href="style.css" rel="stylesheet" type="text/css">
 
   <footer class="footer">
   <div class="waves">
