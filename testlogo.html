@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="avant">Piece avant</div>
+    <div id="arriere">piece arriere</div>
+
+    <div id="cacher"></div>
+    <style>
+        #cacher{
+            width: 50px;
+            height: 50px;
+            background-color: black;
+        }
+    </style>
+  
+    <script>
+
+      const divAvant = document.getElementById("avant");
+      const divArriere = document.getElementById("arriere");
+
+      divAvant.style.display = "block";
+      divArriere.style.display = "none";
+
+      // Afficher la div cible
+      divAvant.addEventListener("click", () => {
+        divArriere.style.display = "block";
+        divAvant.style.display = "none";
+      });
+  
+      // Masquer la div cible
+      divArriere.addEventListener("click", () => {
+        divAvant.style.display = "block";
+        divArriere.style.display = "none";
+      });
+    </script>
+</body>
+</html>
