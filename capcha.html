@@ -6,7 +6,7 @@
     <title>capcha</title>
 </head>
 <body>
-    <canvas id="capcha" width="500" height="500" style="border:1px solid #000000;">
+    <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;">
 
     </canvas>
     <script type="text/javascript">
@@ -14,7 +14,7 @@
         var ctx=c.getContext('2d');
         
         var image = new Image();
-        image.src = 'images/logo-easy-micro.png';
+        image.src = 'src/images/background capcha.jpg';
         image.onload = function() {
         ctx.drawImage(this,0,0);
         };
