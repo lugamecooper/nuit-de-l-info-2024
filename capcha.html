@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captcha avec Pièces Fixes</title>
+    <title>Captcha avec Pièces Fixes et Mouvement Unique</title>
     <style>
         body {
             margin: 0;
@@ -28,13 +28,14 @@
             left: 50%; /* Centre horizontalement */
             transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
             display: grid;
-            grid-template-columns: repeat(3, 10px); /* Grille de 3 colonnes */
+            grid-template-columns: repeat(3, 50px); /* Grille de 3 colonnes */
             grid-gap: 5px; /* Espace entre les pièces */
         }
 
         .piece {
             width: 50px;
             height: 50px;
+            position: relative; /* Permet de positionner chaque pièce sur le canvas */
         }
     </style>
 </head>
@@ -55,23 +56,6 @@
     </div>
 
     <script type="text/javascript">
-        const min = 1;
-        const max = 10;
-
-        let nbr1 = Math.floor(Math.random() * (max - min)) + min;
-        let nbr2, nbr3;
-
-        do {
-            nbr2 = Math.floor(Math.random() * (max - min)) + min;
-        } while (nbr2 === nbr1);
-
-        do {
-            nbr3 = Math.floor(Math.random() * (max - min)) + min;
-        } while (nbr3 === nbr1 || nbr3 === nbr2);
-
-        // Affiche les nombres
-        alert(`Random numbers are: ${nbr1}, ${nbr2}, ${nbr3}`);
-
         // Couleurs prédéfinies pour chaque pièce
         const fixedColors = [
             "red",     // Couleur de la pièce 1
@@ -85,10 +69,17 @@
             "cyan"     // Couleur de la pièce 9
         ];
 
+        // Positions fixes des pièces : ces pièces ne bougeront jamais
+        const fixedPositions = [
+            "piece1", "piece2", "piece3", // Ligne 1
+            "piece4", "piece5", "piece6", // Ligne 2
+            "piece7", "piece8", "piece9"  // Ligne 3
+        ];
+
         // Sélectionner toutes les pièces
         const pieces = document.querySelectorAll('.piece');
 
-        // Appliquer une couleur prédéfinie à chaque pièce
+        // Appliquer une couleur prédéfinie à chaque pièce selon sa position
         pieces.forEach((piece, index) => {
             piece.style.backgroundColor = fixedColors[index]; // Associer une couleur fixe selon l'ordre
         });
@@ -107,6 +98,36 @@
         image.onerror = function () {
             console.error("Impossible de charger l'image de fond pour le captcha.");
         };
+
+        // Sélectionner trois pièces aléatoires pour bouger
+        const movingPieces = [];
+        while (movingPieces.length < 3) {
+            const randomIndex = Math.floor(Math.random() * pieces.length);
+            const pieceId = pieces[randomIndex].id;
+
+            // Ne pas sélectionner les pièces déjà fixes (par exemple, la pièce 5)
+            if (!movingPieces.includes(pieceId) && !fixedPositions.includes(pieceId)) {
+                movingPieces.push(pieceId);
+            }
+        }
+
+        // Fonction pour téléporter une pièce dans le canvas
+        function teleportPiece(pieceId) {
+            const piece = document.getElementById(pieceId);
+            const canvasRect = canvas.getBoundingClientRect();
+
+            // Générer des coordonnées aléatoires dans les limites du canvas
+            const randomX = Math.random() * (canvasRect.width - 50); // Largeur réduite de la taille de la pièce
+            const randomY = Math.random() * (canvasRect.height - 50); // Hauteur réduite de la taille de la pièce
+
+            // Positionner la pièce à sa nouvelle position
+            piece.style.position = "absolute";
+            piece.style.left = `${canvasRect.left + randomX}px`;
+            piece.style.top = `${canvasRect.top + randomY}px`;
+        }
+
+        // Téléporter les trois pièces une seule fois, en excluant celles qui sont fixes
+        movingPieces.forEach(teleportPiece);
     </script>
 </body>
 </html>
