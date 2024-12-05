@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #cacher{
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            position: absolute; /* Permet de placer l'élément à une position précise */
+        }
+    </style>
 </head>
 <body>
     <div id="avant">Piece avant</div>
     <div id="arriere">piece arriere</div>
 
     <div id="cacher"></div>
-    <style>
-        #cacher{
-            width: 50px;
-            height: 50px;
-            background-color: black;
-        }
-    </style>
   
     <script>
 
       const divAvant = document.getElementById("avant");
       const divArriere = document.getElementById("arriere");
+      const divCacher = document.getElementById("cacher");
 
       divAvant.style.display = "block";
       divArriere.style.display = "none";
@@ -36,6 +38,23 @@
       divArriere.addEventListener("click", () => {
         divAvant.style.display = "block";
         divArriere.style.display = "none";
+      });
+
+      // Déplacer le carré à une position aléatoire
+      function moveSquare() {
+        const maxWidth = window.innerWidth - divCacher.offsetWidth;
+        const maxHeight = window.innerHeight - divCacher.offsetHeight;
+
+        const randomX = Math.random() * maxWidth;
+        const randomY = Math.random() * maxHeight;
+
+        divCacher.style.left = `${randomX}px`;
+        divCacher.style.top = `${randomY}px`;
+      }
+
+      // Déplacer le carré chaque fois que la div "avant" est cliquée
+      divCacher.addEventListener("click", () => {
+        moveSquare();  // Déplace le carré de manière aléatoire
       });
     </script>
 </body>
