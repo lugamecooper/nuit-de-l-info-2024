@@ -83,44 +83,42 @@ body{
     opacity: 1;
     bottom: 0;
     animation: animateWaves 4s linear infinite;
-  }
-  
-  .wave#wave2 {
+}
+
+.wave#wave2 {
     z-index: 999;
     opacity: 0.5;
     bottom: 10px;
     animation: animate 4s linear infinite !important;
-  }
-  
-  .wave#wave3 {
+}
+
+.wave#wave3 {
     z-index: 1000;
     opacity: 0.2;
     bottom: 15px;
     animation: animateWaves 3s linear infinite;
-  }
-  
-  .wave#wave4 {
+}
+
+.wave#wave4 {
     z-index: 999;
     opacity: 0.7;
     bottom: 20px;
     animation: animate 3s linear infinite;
-  }
-  
-  @keyframes animateWaves {
+}
+
+@keyframes animateWaves {
     0% {
-      background-position-x: 1000px;
+    background-position-x: 1000px;
     }
     100% {
-      background-positon-x: 0px;
+    background-positon-x: 0px;
     }
-  }
-  
-  @keyframes animate {
+}
+@keyframes animate {
     0% {
-      background-position-x: -1000px;
+    background-position-x: -1000px;
     }
     100% {
-      background-positon-x: 0px;
+    background-positon-x: 0px;
     }
->>>>>>> 13c95197789a4a59f985f30dee96340b587c98a1
 }
