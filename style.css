@@ -1,7 +1,12 @@
-body{
-    background-color: black;
-}
 
 h1{
     color: red;
+}
+
+.div_martyr{
+    opacity: 20%;
+    background-color: blue;
+}
+.div_martyr:hover{
+    opacity: 100%;
 }
