@@ -3,185 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captcha avec Pièces Fixes</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center; /* Centre horizontalement */
-            align-items: center; /* Centre verticalement */
-            height: 100vh; /* Hauteur de la fenêtre */
-            background-color: #f0f0f0; /* Couleur de fond pour contraste */
-        }
-
-        #canvas-container {
-            position: relative; /* Conteneur pour positionner le puzzle */
-        }
-
-        #capcha {
-            display: block;
-        }
-
-        #puzzle {
-            position: absolute; /* Positionner par rapport au conteneur parent */
-            top: 50%; /* Centre verticalement */
-            left: 50%; /* Centre horizontalement */
-            transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-            display: grid;
-            grid-template-columns: repeat(3, 50px); /* Grille de 3 colonnes */
-            grid-gap: 10px; /* Espace entre les pièces */
-        }
-
-        .piece {
-            width: 50px;
-            height: 50px;
-            cursor: pointer; /* Indique que les pièces peuvent être déplacées */
-        }
-
-        /* Positionnement spécifique des pièces fixes */
-        #piece1 { grid-column: 1; grid-row: 1; } /* Pièce rouge en haut à gauche */
-        #piece2 { grid-column: 2; grid-row: 1; } /* Pièce bleue */
-        #piece3 { grid-column: 3; grid-row: 1; } /* Pièce verte */
-        #piece4 { grid-column: 1; grid-row: 2; } /* Pièce jaune */
-        #piece5 { grid-column: 2; grid-row: 2; } /* Pièce orange */
-        #piece6 { grid-column: 3; grid-row: 2; } /* Pièce violette */
-        #piece7 { grid-column: 1; grid-row: 3; } /* Pièce rose */
-        #piece8 { grid-column: 2; grid-row: 3; } /* Pièce brune */
-        #piece9 { grid-column: 3; grid-row: 3; } /* Pièce cyan */
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <div id="canvas-container">
-        <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;"></canvas>
-        <div id="puzzle">
-            <div id="piece1" class="piece"></div>
-            <div id="piece2" class="piece"></div>
-            <div id="piece3" class="piece"></div>
-            <div id="piece4" class="piece"></div>
-            <div id="piece5" class="piece"></div>
-            <div id="piece6" class="piece"></div>
-            <div id="piece7" class="piece"></div>
-            <div id="piece8" class="piece"></div>
-            <div id="piece9" class="piece"></div>
-        </div>
+<center><div id="table" style="display: table;">
+    <div id="row1" style="display: table-row;">
+       <div id="cell11" class="tile1" onClick="clickTile(1,1);"></div>
+       <div id="cell12" class="tile2" onClick="clickTile(1,2);"></div>
+       <div id="cell13" class="tile3" onClick="clickTile(1,3);"></div>
     </div>
-
-    <script type="text/javascript">
-        const min = 1;
-        const max = 9;
-
-        // Couleurs prédéfinies pour chaque pièce
-        const fixedColors = [
-            "red",     // Couleur de la pièce 1
-            "blue",    // Couleur de la pièce 2
-            "green",   // Couleur de la pièce 3
-            "yellow",  // Couleur de la pièce 4
-            "orange",  // Couleur de la pièce 5
-            "purple",  // Couleur de la pièce 6
-            "pink",    // Couleur de la pièce 7
-            "brown",   // Couleur de la pièce 8
-            "cyan"     // Couleur de la pièce 9
-        ];
-
-        // Sélectionner toutes les pièces
-        const pieces = document.querySelectorAll('.piece');
-
-        // Appliquer une couleur prédéfinie à chaque pièce
-        pieces.forEach((piece, index) => {
-            piece.style.backgroundColor = fixedColors[index]; // Associer une couleur fixe selon l'ordre
-        });
-
-        // Dessiner le fond du captcha
-        const canvas = document.getElementById("capcha");
-        const ctx = canvas.getContext('2d');
-
-        const image = new Image();
-        image.src = 'src/images/background capcha.jpg'; // Assurez-vous que le chemin est correct
-        image.onload = function () {
-            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        };
-
-        // Gestion des erreurs de chargement d'image
-        image.onerror = function () {
-            console.error("Impossible de charger l'image de fond pour le captcha.");
-        };
-
-        // Fonction pour déplacer aléatoirement 3 pièces (sans exclure aucune pièce)
-        function moveRandomPieces() {
-            const movedIndices = new Set(); // Utilisation d'un Set pour éviter les doublons
-            const movedPieces = []; // Tableau pour stocker les pièces déplacées
-
-            // Sélectionner aléatoirement 3 indices parmi toutes les pièces
-            while (movedIndices.size < 3) {
-                const randomIndex = Math.floor(Math.random() * 9); // Générer un indice entre 0 et 8
-                movedIndices.add(randomIndex); // Ajouter l'indice au Set
-                movedPieces.push({
-                    index: randomIndex,
-                    color: fixedColors[randomIndex],
-                    element: pieces[randomIndex]
-                });
-            }
-
-            // Déplacer les pièces retirées à des positions aléatoires sur la grille
-            movedPieces.forEach(piece => {
-                const randomX = Math.floor(Math.random() * (canvas.width - 50)); // Position X aléatoire
-                const randomY = Math.floor(Math.random() * (canvas.height - 50)); // Position Y aléatoire
-
-                // Déplacer la pièce dans la grille vers sa nouvelle position
-                piece.element.style.position = "absolute";
-                piece.element.style.left = `${randomX}px`;
-                piece.element.style.top = `${randomY}px`;
-
-                // Redessiner la pièce sur le canvas avec la même couleur
-                ctx.fillStyle = piece.color; // Utiliser la couleur de la pièce déplacée
-                ctx.fillRect(randomX, randomY, 50, 50); // Dessiner le carré à une position aléatoire
-            });
-        }
-
-        // Appel de la fonction pour déplacer les pièces et les afficher sur le canvas
-        moveRandomPieces();
-
-        // Variables pour la gestion du glissement
-        let draggedPiece = null;
-        let offsetX = 0;
-        let offsetY = 0;
-
-        // Fonction pour gérer le début du glissement
-        function onMouseDown(event) {
-            draggedPiece = event.target; // La pièce qui est déplacée
-            offsetX = event.clientX - draggedPiece.getBoundingClientRect().left;
-            offsetY = event.clientY - draggedPiece.getBoundingClientRect().top;
-            draggedPiece.style.zIndex = 1000; // Appliquer un z-index élevé pendant le déplacement
-        }
-
-        // Fonction pour gérer le déplacement de la pièce
-        function onMouseMove(event) {
-            if (draggedPiece) {
-                const newX = event.clientX - offsetX;
-                const newY = event.clientY - offsetY;
-                draggedPiece.style.left = `${newX}px`;
-                draggedPiece.style.top = `${newY}px`;
-            }
-        }
-
-        // Fonction pour gérer la fin du glissement
-        function onMouseUp() {
-            if (draggedPiece) {
-                draggedPiece.style.zIndex = ''; // Rétablir le z-index normal
-                draggedPiece = null;
-            }
-        }
-
-        // Ajouter les écouteurs d'événements pour chaque pièce déplacée
-        pieces.forEach(piece => {
-            piece.addEventListener('mousedown', onMouseDown);
-        });
-
-        // Ajouter un écouteur pour le déplacement global de la souris
-        document.addEventListener('mousemove', onMouseMove);
-
-        // Ajouter un écouteur pour la fin du glissement
-        document.addEventListener('mouseup', onMouseUp);
-    </script>
+    <div id="row2" style="display: table-row;">
+       <div id="cell21" class="tile4" onClick="clickTile(2,1);"></div>
+       <div id="cell22" class="tile5" onClick="clickTile(2,2);"></div>
+       <div id="cell23" class="tile6" onClick="clickTile(2,3);"></div>
+    </div>
+    <div id="row3" style="display: table-row;">
+       <div id="cell31" class="tile7" onClick="clickTile(3,1);"></div>
+       <div id="cell32" class="tile8" onClick="clickTile(3,2);"></div>
+       <div id="cell33" class="tile9" onClick="clickTile(3,3);"></div>
+    </div>
+ </div>
+   <button onClick="shuffle();">New Game</button>
+ </center>
 </body>
+<style>
+    body{ 
+        background: #AAAAAA;
+    }
+
+    #table {
+    display: table;
+    margin: 0 auto;
+    width: 360px;
+    height: 360px;
+    }
+
+.tile1, .tile2, .tile3, .tile4, .tile5, .tile6, .tile7, .tile8, .tile9 {
+  display: table-cell;
+  width: 120px;
+  height: 120px;
+  border: 1px solid white;
+  background: url(src/images/background\ capcha.jpg);
+  background-size: 360px 360px;
+  cursor: pointer;
+}
+
+.tile1 {background-position: 0 0;}
+.tile2 {background-position: -120px 0;}
+.tile3 {background-position: -240px 0;}
+.tile4 {background-position: 0 -120px;}
+.tile5 {background-position: -120px -120px;}
+.tile6 {background-position: -240px -120px;}
+.tile7 {background-position: 0 -240px;}
+.tile8 {background-position: -120px -240px;}
+.tile9 {background: white; cursor: default;}
+
+</style>
+<script>
+    function swapTiles(cell1,cell2) {
+  var temp = document.getElementById(cell1).className;
+  document.getElementById(cell1).className = document.getElementById(cell2).className;
+  document.getElementById(cell2).className = temp;
+}
+
+function shuffle() {
+  for (var row=1; row<=3; row++) {
+    for (var column=1; column<=3; column++) {
+      var row2 = Math.floor(Math.random() * 3 + 1);
+      var column2 = Math.floor(Math.random() * 3 + 1);
+
+      swapTiles("cell" + row + column, "cell" + row2 + column2);
+    }
+  }
+}
+
+function clickTile(row,column) {
+  var cell = document.getElementById("cell" + row + column);
+  var tile = cell.className;
+  
+  if (tile != "tile9") {
+    if (column < 3) {
+      if (document.getElementById("cell" + row + (column + 1)).className == "tile9") {
+        swapTiles("cell" + row + column, "cell" + row + (column + 1));
+        return;
+      }
+    }
+    
+    if (column > 1) {
+      if (document.getElementById("cell" + row + (column - 1)).className == "tile9") {
+        swapTiles("cell" + row + column, "cell" + row + (column - 1));
+        return;
+      }
+    }
+
+    if (row > 1) {
+      if (document.getElementById("cell" + (row - 1) + column).className == "tile9") {
+        swapTiles("cell" + row + column, "cell" + (row - 1) + column);
+        return;
+      }
+    }
+
+    if (row < 3) {
+      if (document.getElementById("cell" + (row + 1) + column).className == "tile9") {
+        swapTiles("cell" + row + column, "cell" + (row + 1) + column);
+        return;
+      }
+    }
+  }
+}
+
+// Appel de shuffle() dès le chargement de la page
+window.onload = shuffle;
+</script>
 </html>
