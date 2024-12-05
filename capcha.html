@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha avec Pièces Fixes et Mouvement Unique</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Centre horizontalement */
+            align-items: center; /* Centre verticalement */
+            height: 100vh; /* Hauteur de la fenêtre */
+            background-color: #f0f0f0; /* Couleur de fond pour contraste */
+        }
+
+        #canvas-container {
+            position: relative; /* Conteneur pour positionner le puzzle */
+        }
+
+        #capcha {
+            display: block;
+        }
+
+        #puzzle {
+            position: absolute; /* Positionner par rapport au conteneur parent */
+            top: 50%; /* Centre verticalement */
+            left: 50%; /* Centre horizontalement */
+            transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
+            display: grid;
+            grid-template-columns: repeat(3, 50px); /* Grille de 3 colonnes */
+            grid-gap: 5px; /* Espace entre les pièces */
+        }
+
+        .piece {
+            width: 50px;
+            height: 50px;
+            position: relative; /* Permet de positionner chaque pièce sur le canvas */
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;"></canvas>
+        <div id="puzzle">
+            <div id="piece1" class="piece"></div>
+            <div id="piece2" class="piece"></div>
+            <div id="piece3" class="piece"></div>
+            <div id="piece4" class="piece"></div>
+            <div id="piece5" class="piece"></div>
+            <div id="piece6" class="piece"></div>
+            <div id="piece7" class="piece"></div>
+            <div id="piece8" class="piece"></div>
+            <div id="piece9" class="piece"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Couleurs prédéfinies pour chaque pièce
+        const fixedColors = [
+            "red",     // Couleur de la pièce 1
+            "blue",    // Couleur de la pièce 2
+            "green",   // Couleur de la pièce 3
+            "yellow",  // Couleur de la pièce 4
+            "orange",  // Couleur de la pièce 5
+            "purple",  // Couleur de la pièce 6
+            "pink",    // Couleur de la pièce 7
+            "brown",   // Couleur de la pièce 8
+            "cyan"     // Couleur de la pièce 9
+        ];
+
+        // Positions fixes des pièces : ces pièces ne bougeront jamais
+        const fixedPositions = [
+            "piece1", "piece2", "piece3", // Ligne 1
+            "piece4", "piece5", "piece6", // Ligne 2
+            "piece7", "piece8", "piece9"  // Ligne 3
+        ];
+
+        // Sélectionner toutes les pièces
+        const pieces = document.querySelectorAll('.piece');
+
+        // Appliquer une couleur prédéfinie à chaque pièce selon sa position
+        pieces.forEach((piece, index) => {
+            piece.style.backgroundColor = fixedColors[index]; // Associer une couleur fixe selon l'ordre
+        });
+
+        // Dessiner le fond du captcha
+        const canvas = document.getElementById("capcha");
+        const ctx = canvas.getContext('2d');
+
+        const image = new Image();
+        image.src = 'src/images/background capcha.jpg'; // Assurez-vous que le chemin est correct
+        image.onload = function () {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        };
+
+        // Gestion des erreurs de chargement d'image
+        image.onerror = function () {
+            console.error("Impossible de charger l'image de fond pour le captcha.");
+        };
+
+        // Sélectionner trois pièces aléatoires pour bouger
+        const movingPieces = [];
+        while (movingPieces.length < 3) {
+            const randomIndex = Math.floor(Math.random() * pieces.length);
+            const pieceId = pieces[randomIndex].id;
+
+            // Ne pas sélectionner les pièces déjà fixes (par exemple, la pièce 5)
+            if (!movingPieces.includes(pieceId) && !fixedPositions.includes(pieceId)) {
+                movingPieces.push(pieceId);
+            }
+        }
+
+        // Fonction pour téléporter une pièce dans le canvas
+        function teleportPiece(pieceId) {
+            const piece = document.getElementById(pieceId);
+            const canvasRect = canvas.getBoundingClientRect();
+
+            // Générer des coordonnées aléatoires dans les limites du canvas
+            const randomX = Math.random() * (canvasRect.width - 50); // Largeur réduite de la taille de la pièce
+            const randomY = Math.random() * (canvasRect.height - 50); // Hauteur réduite de la taille de la pièce
+
+            // Positionner la pièce à sa nouvelle position
+            piece.style.position = "absolute";
+            piece.style.left = `${canvasRect.left + randomX}px`;
+            piece.style.top = `${canvasRect.top + randomY}px`;
+        }
+
+        // Téléporter les trois pièces une seule fois, en excluant celles qui sont fixes
+        movingPieces.forEach(teleportPiece);
+    </script>
+</body>
+</html>
