@@ -1,15 +1,32 @@
 body{
     background: #6694d9;
-    display: block;
 }
 .header{
     top: 0px;
     left: 0px;
     position: sticky;
-    height: 90px;
+    height: 100px;
+    background-color: #3586ff;
 }
 .header img{
     size: 20%;
+}
+.header button{
+    background-color: #00bfee;
+    color: #3586ff;
+    border: none;
+    font-size: 22px;
+    float: right;
+    border: 0px;
+    padding: 15px;
+    margin-top: 18px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.header button:hover{
+    background-color: #3586ff;
+    color: #6694d9;
+    font-size: 22px;
 }
 .footer {
     position: relative;
