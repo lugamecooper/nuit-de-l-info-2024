@@ -5,6 +5,10 @@ body{
     background-color: #001f3f; /* Couleur de fond sombre */
     overflow: hidden; /* Évite le défilement */
 }
+body{
+    background: #6694d9;
+    display: block;
+}
 .header{
     top: 0px;
     left: 0px;
