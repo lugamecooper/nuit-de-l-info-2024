@@ -1,11 +1,7 @@
 body{
-    background: #6694d9;
-    display: block;
-    margin: 2%;
+    background-color: black;
 }
-.header{
-    top: 0px;
-    left: 0px;
-    position: sticky;
-    height: 90px;
+
+h1{
+    color: red;
 }
