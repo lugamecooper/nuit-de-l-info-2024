@@ -1,6 +1,9 @@
 <?php
 
 echo '
+
+<link rel="stylesheet" href="mystyle.css">
+
     <footer class="footer">
         <div class="waves">
         <div class="wave" id="wave1"></div>
@@ -27,14 +30,11 @@ echo '
         <li class="menu__item"><a class="menu__link" href="#">Haut du corp</a></li>
         <li class="menu__item"><a class="menu__link" href="#">Bas du corps</a></li>
         <li class="menu__item"><a class="menu__link" href="#">Pied</a></li>
-
         </ul>
-        <p>2024 Nuit de l'info | Tout Droits réservé</p>
+
     </footer>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    </body>
-
 ';
 
 ?>
