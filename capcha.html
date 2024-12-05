@@ -20,21 +20,38 @@
     <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;">
     </canvas>
 
-
     <script type="text/javascript">
-        var min=1;
-        var max=10;
-        var random = Math.floor(Math.random() * (max - min)) + min;
-        nbr1=random;
+        // Generate three unique random numbers
+        const min = 1;
+        const max = 10;
 
+        let nbr1 = Math.floor(Math.random() * (max - min)) + min;
+        let nbr2, nbr3;
 
-        var c = document.getElementById("capcha");
-        var ctx = c.getContext('2d');
-        
-        var image = new Image();
-        image.src = 'src/images/background capcha.jpg';
-        image.onload = function() {
-            ctx.drawImage(image, 0, 0, c.width, c.height);
+        do {
+            nbr2 = Math.floor(Math.random() * (max - min)) + min;
+        } while (nbr2 === nbr1);
+
+        do {
+            nbr3 = Math.floor(Math.random() * (max - min)) + min;
+        } while (nbr3 === nbr1 || nbr3 === nbr2);
+
+        // Display the numbers
+        alert(`Random numbers are: ${nbr1}, ${nbr2}, ${nbr3}`);
+
+        // Draw the captcha background
+        const canvas = document.getElementById("capcha");
+        const ctx = canvas.getContext('2d');
+
+        const image = new Image();
+        image.src = 'src/images/background capcha.jpg'; // Ensure the path is correct
+        image.onload = function () {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        };
+
+        // Handle potential loading errors
+        image.onerror = function () {
+            console.error("Failed to load the captcha background image.");
         };
     </script>
 </body>
