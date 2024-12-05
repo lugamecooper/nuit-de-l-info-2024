@@ -1,4 +1,11 @@
 body{
+    display: block;
+    margin: 2%;
+    font-family: 'Arial', sans-serif;
+    background-color: #001f3f; /* Couleur de fond sombre */
+    overflow: hidden; /* Évite le défilement */
+}
+body{
     background: #6694d9;
 }
 .header{

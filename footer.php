@@ -4,7 +4,7 @@ echo '
 
 <link rel="stylesheet" href="mystyle.css">
 
-    <footer class="footer">
+        <footer class="footer">
         <div class="waves">
         <div class="wave" id="wave1"></div>
         <div class="wave" id="wave2"></div>
