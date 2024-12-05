@@ -3,25 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captcha</title>
+    <title>Captcha avec Pièces Fixes</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Centre horizontalement */
+            align-items: center; /* Centre verticalement */
+            height: 100vh; /* Hauteur de la fenêtre */
+            background-color: #f0f0f0; /* Couleur de fond pour contraste */
+        }
+
+        #canvas-container {
+            position: relative; /* Conteneur pour positionner le puzzle */
+        }
+
+        #capcha {
+            display: block;
+        }
+
+        #puzzle {
+            position: absolute; /* Positionner par rapport au conteneur parent */
+            top: 50%; /* Centre verticalement */
+            left: 50%; /* Centre horizontalement */
+            transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
+            display: grid;
+            grid-template-columns: repeat(3, 10px); /* Grille de 3 colonnes */
+            grid-gap: 5px; /* Espace entre les pièces */
+        }
+
+        .piece {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    <div id="puzzle">
-        <div id="piece1">piece1</div>
-        <div id="piece2">piece2</div>
-        <div id="piece3">piece3</div>
-        <div id="piece4">piece4</div>
-        <div id="piece5">piece5</div>
-        <div id="piece6">piece6</div>
-        <div id="piece7">piece7</div>
-        <div id="piece8">piece8</div>
-        <div id="piece9">piece9</div>
+    <div id="canvas-container">
+        <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;"></canvas>
+        <div id="puzzle">
+            <div id="piece1" class="piece"></div>
+            <div id="piece2" class="piece"></div>
+            <div id="piece3" class="piece"></div>
+            <div id="piece4" class="piece"></div>
+            <div id="piece5" class="piece"></div>
+            <div id="piece6" class="piece"></div>
+            <div id="piece7" class="piece"></div>
+            <div id="piece8" class="piece"></div>
+            <div id="piece9" class="piece"></div>
+        </div>
     </div>
-    <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;">
-    </canvas>
 
     <script type="text/javascript">
-        // Generate three unique random numbers
         const min = 1;
         const max = 10;
 
@@ -36,22 +69,43 @@
             nbr3 = Math.floor(Math.random() * (max - min)) + min;
         } while (nbr3 === nbr1 || nbr3 === nbr2);
 
-        // Display the numbers
+        // Affiche les nombres
         alert(`Random numbers are: ${nbr1}, ${nbr2}, ${nbr3}`);
 
-        // Draw the captcha background
+        // Couleurs prédéfinies pour chaque pièce
+        const fixedColors = [
+            "red",     // Couleur de la pièce 1
+            "blue",    // Couleur de la pièce 2
+            "green",   // Couleur de la pièce 3
+            "yellow",  // Couleur de la pièce 4
+            "orange",  // Couleur de la pièce 5
+            "purple",  // Couleur de la pièce 6
+            "pink",    // Couleur de la pièce 7
+            "brown",   // Couleur de la pièce 8
+            "cyan"     // Couleur de la pièce 9
+        ];
+
+        // Sélectionner toutes les pièces
+        const pieces = document.querySelectorAll('.piece');
+
+        // Appliquer une couleur prédéfinie à chaque pièce
+        pieces.forEach((piece, index) => {
+            piece.style.backgroundColor = fixedColors[index]; // Associer une couleur fixe selon l'ordre
+        });
+
+        // Dessiner le fond du captcha
         const canvas = document.getElementById("capcha");
         const ctx = canvas.getContext('2d');
 
         const image = new Image();
-        image.src = 'src/images/background capcha.jpg'; // Ensure the path is correct
+        image.src = 'src/images/background capcha.jpg'; // Assurez-vous que le chemin est correct
         image.onload = function () {
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
         };
 
-        // Handle potential loading errors
+        // Gestion des erreurs de chargement d'image
         image.onerror = function () {
-            console.error("Failed to load the captcha background image.");
+            console.error("Impossible de charger l'image de fond pour le captcha.");
         };
     </script>
 </body>
