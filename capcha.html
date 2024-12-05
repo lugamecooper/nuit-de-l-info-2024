@@ -3,21 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>capcha</title>
+    <title>Captcha</title>
 </head>
 <body>
+    <div id="puzzle">
+        <div id="piece1">piece1</div>
+        <div id="piece2">piece2</div>
+        <div id="piece3">piece3</div>
+        <div id="piece4">piece4</div>
+        <div id="piece5">piece5</div>
+        <div id="piece6">piece6</div>
+        <div id="piece7">piece7</div>
+        <div id="piece8">piece8</div>
+        <div id="piece9">piece9</div>
+    </div>
     <canvas id="capcha" width="800" height="500" style="border:1px solid #000000;">
-
     </canvas>
+
+
     <script type="text/javascript">
-        var c=document.getElementById("capcha");
-        var ctx=c.getContext('2d');
+        var min=1;
+        var max=10;
+        var random = Math.floor(Math.random() * (max - min)) + min;
+        nbr1=random
+        while(nbr1=random){
+            var random = Math.floor(Math.random() * (max - min)) + min;
+        }
+            
+        alert(random);
+
+
+
+
+
+        var c = document.getElementById("capcha");
+        var ctx = c.getContext('2d');
         
         var image = new Image();
         image.src = 'src/images/background capcha.jpg';
         image.onload = function() {
-        ctx.drawImage(this,0,0);
+            ctx.drawImage(image, 0, 0, c.width, c.height);
         };
-        </script>
+    </script>
 </body>
 </html>
