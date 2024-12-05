@@ -2,6 +2,6 @@
     echo 
     "<link rel='stylesheet' href='style.css'>
     <div class='header'>
-    <p>test</p>
+        <img src='./src/img/drop-of-water-free-png.png'>
     </div>";
 ?>
