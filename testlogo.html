@@ -6,20 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="piece avant">
-        <img src="" alt="">
-        <H1>test</H1>
-    </div>
-    <div id="piece arriere">
-        <img src="" alt="">
-        <H1>aaaaa</H1>
-    </div>
-    <style>
-
-    </style>
+    <div id="avant">Piece avant</div>
+    <div id="arriere">piece arriere</div>
+  
     <script>
-        
 
+      const divAvant = document.getElementById("avant");
+      const divArriere = document.getElementById("arriere");
+
+      divAvant.style.display = "block";
+      divArriere.style.display = "none";
+
+      // Afficher la div cible
+      divAvant.addEventListener("click", () => {
+        divArriere.style.display = "block";
+        divAvant.style.display = "none";
+      });
+  
+      // Masquer la div cible
+      divArriere.addEventListener("click", () => {
+        divAvant.style.display = "block";
+        divArriere.style.display = "none";
+      });
     </script>
 </body>
 </html>
