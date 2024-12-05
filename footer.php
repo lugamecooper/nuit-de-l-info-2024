@@ -1,6 +1,6 @@
-1.  <?php
+<?php
 
-<link href="style.css" rel="stylesheet" type="text/css">
+print '<link href="style.css" rel="stylesheet" type="text/css">
 
   <footer class="footer">
   <div class="waves">
@@ -34,6 +34,6 @@
   <p>&copy;2021 Nadine Coelho | All Rights Reserved</p>
 </footer>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>';
 
 ?>

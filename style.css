@@ -1,7 +1,6 @@
 body{
     background: #6694d9;
     display: block;
-    margin: 2%;
 }
 .header{
     top: 0px;
@@ -9,12 +8,41 @@ body{
     position: sticky;
     height: 90px;
 }
+.header img{
+    size: 20%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .footer {
     position: relative;
     width: 100%;
     background: #3586ff;
     min-height: 100px;
-    padding: 20px 50px;
     display: flex;
     justify-content: center;
     align-items: center;
