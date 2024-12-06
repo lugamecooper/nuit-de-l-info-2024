@@ -13,7 +13,7 @@
             width: 200px; /* Largeur du conteneur */
             height: 200px; /* Hauteur du conteneur */
             transform-style: preserve-3d; /* Préserve la 3D pour les enfants */
-            transition: transform 0.6s; /* Transition pour la rotation */
+            transition: transform 0.4s; /* Transition pour la rotation */
         }
         #avant, #arriere {
             position: absolute;
@@ -30,7 +30,6 @@
             background-color: blue; /* Couleur du recto */
         }
         #arriere {
-            background-color: red; /* Couleur du verso */
             transform: rotateY(180deg); /* Tourne le verso */
         }
         #cacher {
@@ -38,13 +37,24 @@
             height: 50px;
             background-color: black;
             position: absolute; /* Permet de placer l'élément à une position précise */
+            cursor: pointer; /* Change le curseur quand on survole le carré */
+        }
+
+        /* Animation pour faire tourner le conteneur une seule fois (180 degrés) */
+        @keyframes rotation {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(1800deg); /* Effectuer un seul tour de 180 degrés */
+            }
         }
     </style>
 </head>
 <body>
     <div id="container">
         <div id="avant">Piece avant</div>
-        <div id="arriere">Piece arrière</div>
+        <div id="arriere"><img src="src/images/logo.jpg" alt=""></div>
     </div>
 
     <div id="cacher"></div>
@@ -55,27 +65,32 @@
         const divCacher = document.getElementById("cacher");
         const container = document.getElementById("container");
 
-        // Déplacer le carré à une position aléatoire
+        // Définir un tableau de valeurs possibles pour les coordonnées
+        const possibleValues = [5, 50, 18, 60, 40, 35]; // Les valeurs en pixels
+
+        // Déplacer le carré à une position aléatoire parmi les valeurs spécifiées
         function moveSquare() {
-            const maxWidth = window.innerWidth - divCacher.offsetWidth;
-            const maxHeight = window.innerHeight - divCacher.offsetHeight;
+            // Choisir une valeur aléatoire dans le tableau possibleValues
+            const randomX = possibleValues[Math.floor(Math.random() * possibleValues.length)];
+            const randomY = possibleValues[Math.floor(Math.random() * possibleValues.length)];
 
-            const randomX = Math.random() * maxWidth;
-            const randomY = Math.random() * maxHeight;
-
+            // Appliquer les nouvelles coordonnées
             divCacher.style.left = `${randomX}px`;
             divCacher.style.top = `${randomY}px`;
         }
 
-        // Afficher la div cible avec rotation
-        container.addEventListener("click", () => {
-            container.style.transform = container.style.transform === "rotateY(180deg)" ? "rotateY(0deg)" : "rotateY(180deg)";
+        // Lancer l'animation de rotation au rechargement de la page
+        window.addEventListener('load', () => {
+            container.style.animation = "rotation 10s ease-in-out forwards";  // Applique l'animation de rotation (1 seul tour, 10s)
         });
 
-        // Déplacer le carré chaque fois que la div "avant" ou "arrière" est cliquée
+        // Déplacer le carré chaque fois que la div "cacher" est cliquée
         divCacher.addEventListener("click", () => {
-            moveSquare();  // Déplace le carré de manière aléatoire
+            moveSquare();  // Déplace le carré de manière aléatoire parmi les valeurs
         });
+
+        // Déplacer le carré dès que la page se charge, pour qu'il soit visible au départ
+        moveSquare();
     </script>
 </body>
 </html>
