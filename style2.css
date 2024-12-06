@@ -1,0 +1,124 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #001f3f; /* Couleur sombre pour le fond */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+header {
+    background-color: #003366;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+nav a:hover {
+    background-color: #00bfff;
+}
+#container {
+    display: none; /* Cacher le contenu jusqu'à validation du captcha */
+    max-width: 900px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+    background: #003366; /* Couleur de fond du conteneur */
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex-grow: 1; /* Prendre l'espace restant */
+    display: flex; /* Flex pour aligner le corps humain et les infos */
+}
+#corps {
+    position: relative;
+    width: 350px;
+    height: 600px;
+    background-image: url('https://cdn.discordapp.com/attachments/1314283268329177128/1314323801462538331/corpscontour-removebg-preview.png?ex=67535aed&is=6752096d&hm=ea2769896fcd12dbd6b3b3b5bc639e732b642b17faf7055d172e03ceda21c780&');
+    background-size: cover;
+    border-radius: 15px 0 0 15px;
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.os {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+.os:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.2);
+}
+#info {
+    margin-left: 20px;
+    padding: 20px;
+    width: 300px;
+    height: 600px;
+    overflow-y: auto;
+    display: none;
+    border-radius: 0 15px 15px 0;
+    background-color: #00509e; /* Couleur d'arrière-plan du panneau d'infos */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #ffffff; /* Texte en blanc pour le contraste */
+}
+h2 {
+    color: #00bfff; /* Couleur du titre */
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 26px;
+    border-bottom: 2px solid #00bfff;
+    padding-bottom: 5px;
+}
+p {
+    line-height: 1.6;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    background-color: #003366; /* Couleur de fond des paragraphes */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #ffffff; /* Texte en blanc pour le contraste */
+}
+footer {
+    background-color: #003366;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+#captcha-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+#skip-captcha {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+#skip-captcha:hover {
+    background-color: #ffd700;
+}
