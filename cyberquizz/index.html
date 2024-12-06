@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberQuiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="BgImg">
+    <header>
+        <div class="header-container">
+            <img src = "asset/LogoFondation.png">
+        </div>
+        <nav>
+            <a href="#">CyberQuizz</a>
+            <a href="#">Crédits</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="quiz-section">
+            <div class="quiz-text">
+                <h2>Testez vos connaissances en cybersécurité grâce à ce quiz interactif !</h2>
+                <p>Connaissez-vous vraiment les principes de sécurité primordiaux pour naviguer sur Internet ?</p>
+                <p>Voyons ça, répondez au quiz ci-contre...</p>
+                <p>Bon il nous reste un peu de texte à écrire sinon ça faisait vide, comment ça va vous ? Ici on travaille bien, tranquillement, un peu fatigués tout de même mais on fait avec.</p>
+            </div>
+            <div class="quiz-image">
+                <div id="quiz">
+                    <p id="question"></p>
+                    <button id="vrai">Vrai</button>
+                    <button id="faux">Faux</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const questions = {
+                "J'ai un mot de passe très sécurisé. Je peux donc l'utiliser sur tous mes comptes et services.": false,
+                "Il est inutile de déposer plainte pour un message d'hameçonnage auquel j'ai répondu.": false,
+                "Je n'ai pas besoin de faire des sauvegardes de mon téléphone.": false,
+                "J'ai le droit de m'exprimer sur mon travail ou mon entreprise sur les réseaux sociaux lorsque j'utilise mon ordinateur personnel.": true
+            };
+
+            let score = 0;
+            let currentQuestionIndex = 0;
+            const questionKeys = Object.keys(questions);
+
+            function loadQuestion() {
+                if (currentQuestionIndex < questionKeys.length) {
+                    document.getElementById("question").textContent = questionKeys[currentQuestionIndex];
+                } else {
+                    document.getElementById("quiz").innerHTML = `<p>Votre score est de ${score} sur ${questionKeys.length}.</p>`;
+                }
+            }
+
+            function checkAnswer(userAnswer) {
+                const correctAnswer = questions[questionKeys[currentQuestionIndex]];
+                if ((userAnswer === "Vrai" && correctAnswer === true) || (userAnswer === "Faux" && correctAnswer === false)) {
+                    alert("Bonne réponse ! Votre score augmente !");
+                    score++;
+                } else {
+                    alert("Mauvaise réponse ! Votre score ne bouge pas !");
+                }
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+
+            document.getElementById("vrai").addEventListener("click", function () {
+                checkAnswer("Vrai");
+            });
+
+            document.getElementById("faux").addEventListener("click", function () {
+                checkAnswer("Faux");
+            });
+
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>
