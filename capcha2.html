@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandbox with Wooden Border</title>
     <style>
+        body{
+            background-image: url(/src/images/arriere-planCapchat.gif) ;
+            background-size: cover; /* L'image couvre toute la fenêtre */
+            background-position: center; /* Centrage de l'image */
+            background-repeat: no-repeat; /* Empêche l'image de se répéter */
+            width: 100%;
+        }
         body, html {
             height: 100%;
             margin: 0;
@@ -12,16 +19,87 @@
             justify-content: center;
             align-items: center;
             background-color: #f4f4f4;
+            flex-direction: column;
         }
 
         canvas {
             border: none;
             box-shadow: 0 0 0 10px #8B4513;
         }
+
+        #infoButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #infoButton:hover {
+            background-color: #A0522D;
+        }
+
+        /* Modal styles */
+        #infoModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* background overlay */
+        }
+
+        #modalContent {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            max-width: 500px;
+        }
+
+        #closeBtn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #closeBtn:hover,
+        #closeBtn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #modalText {
+            font-size: 18px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
     <canvas id="bacASable" width="600" height="400"></canvas>
+    <button id="infoButton">Info</button>
+
+    <!-- Modal -->
+    <div id="infoModal">
+        <div id="modalContent">
+            <span id="closeBtn">&times;</span>
+            <div id="modalText">
+                <h2>À propos du jeu</h2>
+                <p>Bienvenue dans le jeu !</p>
+                <p>Le but est de trouver et de cliquer sur la clé cachée dans le sable. Les éléments autour sont des coquillages, des pierres et du sable. Vous pouvez interagir avec l'environnement en déplaçant le sable autour de la clé.</p>
+                <p>Essayez de trouver la clé en explorant le sable !</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         const canvas = document.getElementById('bacASable');
@@ -52,7 +130,7 @@
         }
 
         function generateElements() {
-            const numElements = 75000;
+            const numElements = 50000;
             const shellChance = 0.002;
             const stoneChance = 0.003;
 
@@ -157,11 +235,32 @@
             }
         }
 
+        // Modal functionality
+        const modal = document.getElementById('infoModal');
+        const closeBtn = document.getElementById('closeBtn');
+        
+        function showInfo() {
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
         positionKeyRandomly();
         generateElements();
         drawScene();
         canvas.addEventListener('mousemove', pushElements);
-        canvas.addEventListener('click', checkKeyClick); // Ajout de l'événement de clic
+        canvas.addEventListener('click', checkKeyClick);
+        
+        // Button to open modal
+        document.getElementById('infoButton').addEventListener('click', showInfo);
     </script>
 </body>
 </html>
