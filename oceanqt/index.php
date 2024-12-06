@@ -10,8 +10,8 @@
         <header>
             <nav class="nav">
                 <ul>
-                    <li class="nav-item"><a href="../oceanqt/">OceanQT</a></li>
-                    <li id="home"><a href="./">CyberQuiz</a></li>
+                    <li id="home"><a href="../oceanqt/">OceanQT</a></li>
+                    <li class="nav-item"><a href="../cyberquiz">CyberQuiz</a></li>
                     <li class="nav-item"><a href="../morpion/">Morpion</a></li>
                     <li class="nav-item"><a href="../credit/">Crédit</a></li>
                 </ul>

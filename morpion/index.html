@@ -24,14 +24,12 @@
 
 
             header {
-                display: flex;
+                display: block;
                 justify-content: space-around;
                 align-items: center;
-                background-color: #0B0190;
                 padding: 20px;
                 color: black;
                 height: 10px;
-                border-bottom: 2px solid #0801A3;
             }
 
             .nav ul {
@@ -211,16 +209,16 @@
 
 <body>
     <header>
-        <nav class="nav">
+        <nav class="nav" style="display: block;position: absolute; top: 0;left: 700px;">
             <ul>
                 <li class="nav-item"><a href="../oceanqt/">OceanQT</a></li>
-                <li id="home"><a href="./">CyberQuiz</a></li>
-                <li class="nav-item"><a href="../morpion/">Morpion</a></li>
+                <li class="nav-item"><a href="../cyberquiz/">CyberQuiz</a></li>
+                <li id="home"><a href="./">Morpion</a></li>
                 <li class="nav-item"><a href="../credit/">Crédit</a></li>
             </ul>
         </nav>
     </header>
-    <div class="game-container">
+    <div class="game-container" style="display: block;">
         <h1>Morpion - Vrai ou Faux sur la Cybersécurité</h1>
         <table>
             <tr>
