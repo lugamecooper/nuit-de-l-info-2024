@@ -5,33 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Morpion - Vrai ou Faux sur la Cybersécurité</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
-        h1 { color: #333; }
-        table { margin: 20px auto; border-collapse: collapse; }
-        td { width: 60px; height: 60px; border: 1px solid #333; font-size: 2em; cursor: pointer; }
-        #message { color: red; margin-top: 20px; }
+        body {
+            background-color: #121212; /* Fond sombre pour un look futuriste */
+            font-family: 'Orbitron', sans-serif; /* Police futuriste */
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url(/src/images/arriere-planMorpion.gif); /* Arrière-plan futuriste */
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            color: #ffffff; /* Couleur néon pour le titre */
+            font-size: 48px;
+            text-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99, 0 0 60px #00ff99;
+            margin-bottom: 30px;
+        }
+
+        .game-container {
+            text-align: center;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background-color: rgba(170, 170, 170, 0.7); /* Fond semi-transparent */
+            border-radius: 10px;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ffffff; /* Bordure néon */
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-color: rgba(0, 255, 255, 0.1); /* Fond lumineux discret */
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        td:hover {
+            background-color: rgba(0, 255, 255, 0.3); /* Effet de survol lumineux */
+            transform: scale(1.1); /* Agrandissement au survol */
+            box-shadow: 0 0 15px #a0a0a0; /* Ombre néon au survol */
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 24px;
+            text-shadow: 0 0 15px #00d0ff, 0 0 30px #00ffff;
+        }
+
+        /* Style de la popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #222;
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #d9d9d9;
+            width: 50%;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 30px;
+            font-weight: bold;
+            float: right;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff00ff;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 15px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #00b7ff;
+            border: none;
+            color: #121212;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #007bff;
+            box-shadow: 0 0 15px #00eaff;
+        }
+
+        /* Style des images */
+        .player-icon {
+            width: 50px;
+            height: 50px;
+            transition: all 0.2s ease;
+        }
+
+        .player-icon:hover {
+            transform: rotate(15deg); /* Effet de rotation des icônes */
+        }
     </style>
 </head>
 <body>
-    <h1>Morpion - Vrai ou Faux sur la Cybersécurité</h1>
-    <table>
-        <tr>
-            <td onclick="makeMove(0, 0)"></td>
-            <td onclick="makeMove(0, 1)"></td>
-            <td onclick="makeMove(0, 2)"></td>
-        </tr>
-        <tr>
-            <td onclick="makeMove(1, 0)"></td>
-            <td onclick="makeMove(1, 1)"></td>
-            <td onclick="makeMove(1, 2)"></td>
-        </tr>
-        <tr>
-            <td onclick="makeMove(2, 0)"></td>
-            <td onclick="makeMove(2, 1)"></td>
-            <td onclick="makeMove(2, 2)"></td>
-        </tr>
-    </table>
-    <div id="message"></div>
+    <div class="game-container">
+        <h1>Morpion - Vrai ou Faux sur la Cybersécurité</h1>
+        <table>
+            <tr>
+                <td onclick="makeMove(0, 0)"></td>
+                <td onclick="makeMove(0, 1)"></td>
+                <td onclick="makeMove(0, 2)"></td>
+            </tr>
+            <tr>
+                <td onclick="makeMove(1, 0)"></td>
+                <td onclick="makeMove(1, 1)"></td>
+                <td onclick="makeMove(1, 2)"></td>
+            </tr>
+            <tr>
+                <td onclick="makeMove(2, 0)"></td>
+                <td onclick="makeMove(2, 1)"></td>
+                <td onclick="makeMove(2, 2)"></td>
+            </tr>
+        </table>
+        <div id="message"></div>
+    </div>
+
+    <!-- Popup modale -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalMessage"></p>
+            <div class="buttons">
+                <button class="button" id="trueButton" onclick="checkAnswer(true)">Vrai</button>
+                <button class="button" id="falseButton" onclick="checkAnswer(false)">Faux</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let board = [
             ['', '', ''],
@@ -39,6 +177,10 @@
             ['', '', '']
         ];
         let currentPlayer = 'X';
+
+        // URL des images pour X et O (assurez-vous que ces fichiers existent)
+        const xImage = 'src/images/crabe.png'; // Remplacez par votre image pour X
+        const oImage = 'src/images/poulpe.png'; // Remplacez par votre image pour O
 
         const cyberSecurityFacts = [
             { statement: "Les mots de passe doivent être changés tous les mois.", isTrue: false },
@@ -48,13 +190,52 @@
             { statement: "Les mises à jour de logiciels sont importantes pour la sécurité.", isTrue: true }
         ];
 
+        let currentFact = {}; // Pour stocker la question actuelle et sa réponse correcte
+
+        // Ouvre la fenêtre modale avec la question
+        function openModal(fact) {
+            currentFact = fact;  // Sauvegarder la question et la bonne réponse
+            document.getElementById('modalMessage').innerText = fact.statement;
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        // Ferme la fenêtre modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Vérifie la réponse de l'utilisateur
+        function checkAnswer(userAnswer) {
+            const correctAnswer = currentFact.isTrue ? "Vrai" : "Faux";
+            const userAnswerText = userAnswer ? "Vrai" : "Faux";
+
+            if (userAnswer === currentFact.isTrue) {
+                openModalMessage("Bonne réponse ! C'était " + correctAnswer + ".");
+            } else {
+                openModalMessage("Mauvaise réponse ! C'était " + correctAnswer + ".");
+            }
+        }
+
+        // Ouvre une nouvelle popup avec un message (après avoir répondu à la question)
+        function openModalMessage(message) {
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('myModal').style.display = 'block';
+            setTimeout(closeModal, 2000); // Ferme la popup après 2 secondes
+        }
+
         function makeMove(row, col) {
             if (board[row][col] !== '') {
                 return; // Case déjà occupée
             }
 
             board[row][col] = currentPlayer;
-            document.querySelectorAll('td')[row * 3 + col].innerText = currentPlayer;
+            const cell = document.querySelectorAll('td')[row * 3 + col];
+
+            // Remplacer le texte par l'image correspondante (X ou O)
+            const img = document.createElement('img');
+            img.src = currentPlayer === 'X' ? xImage : oImage;
+            img.className = 'player-icon';
+            cell.appendChild(img);
 
             if (checkWin()) {
                 document.getElementById('message').innerText = "Le joueur " + currentPlayer + " a gagné !";
@@ -87,14 +268,7 @@
 
         function displayCyberSecurityFact() {
             const fact = cyberSecurityFacts[Math.floor(Math.random() * cyberSecurityFacts.length)];
-            const userAnswer = confirm(fact.statement + "\n\nCliquez sur OK pour Vrai ou Annuler pour Faux.");
-            const correctAnswer = fact.isTrue ? "Vrai" : "Faux";
-
-            if ((userAnswer && fact.isTrue) || (!userAnswer && !fact.isTrue)) {
-                alert("Bonne réponse ! C'était " + correctAnswer + ".");
-            } else {
-                alert("Mauvaise réponse ! C'était " + correctAnswer + ".");
-            }
+            openModal(fact);
         }
     </script>
 </body>
