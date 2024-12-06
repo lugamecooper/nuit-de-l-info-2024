@@ -7,6 +7,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <header>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-item"><a href="../oceanqt/">OceanQT</a></li>
+                    <li id="home"><a href="./">CyberQuiz</a></li>
+                    <li class="nav-item"><a href="../morpion/">Morpion</a></li>
+                    <li class="nav-item"><a href="../credit/">Crédit</a></li>
+                </ul>
+            </nav>
+        </header>
         <div class="header">
             <a href="./"><img src="../src/images/rfwalt.png"></a>
             <button onclick="location.href='#squelettejambe'">bas du corps</button>
