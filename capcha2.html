@@ -34,8 +34,7 @@
             const canvasWidth = canvas.width;
             const canvasHeight = canvas.height;
 
-            
-            const keyWidth = 40;
+            const keyWidth = 60; // Taille de la clé
             const keyHeight = 20;
 
             const randomX = Math.random() * (canvasWidth - keyWidth);
@@ -92,7 +91,6 @@
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-
         function drawElements() {
             elements.forEach(item => {
                 if (item.type === 'sand') {
@@ -146,10 +144,24 @@
             drawElements();
         }
 
+        function checkKeyClick(event) {
+            const mouseX = event.offsetX;
+            const mouseY = event.offsetY;
+
+            const keyWidth = 60;
+            const keyHeight = 20;
+
+            if (mouseX >= keyPosition.x && mouseX <= keyPosition.x + keyWidth &&
+                mouseY >= keyPosition.y && mouseY <= keyPosition.y + keyHeight) {
+                alert('Écho réussi !');
+            }
+        }
+
         positionKeyRandomly();
         generateElements();
         drawScene();
         canvas.addEventListener('mousemove', pushElements);
+        canvas.addEventListener('click', checkKeyClick); // Ajout de l'événement de clic
     </script>
 </body>
 </html>

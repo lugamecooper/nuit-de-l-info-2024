@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion - Vrai ou Faux sur la Cybersécurité</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        table { margin: 20px auto; border-collapse: collapse; }
+        td { width: 60px; height: 60px; border: 1px solid #333; font-size: 2em; cursor: pointer; }
+        #message { color: red; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Morpion - Vrai ou Faux sur la Cybersécurité</h1>
+    <table>
+        <tr>
+            <td onclick="makeMove(0, 0)"></td>
+            <td onclick="makeMove(0, 1)"></td>
+            <td onclick="makeMove(0, 2)"></td>
+        </tr>
+        <tr>
+            <td onclick="makeMove(1, 0)"></td>
+            <td onclick="makeMove(1, 1)"></td>
+            <td onclick="makeMove(1, 2)"></td>
+        </tr>
+        <tr>
+            <td onclick="makeMove(2, 0)"></td>
+            <td onclick="makeMove(2, 1)"></td>
+            <td onclick="makeMove(2, 2)"></td>
+        </tr>
+    </table>
+    <div id="message"></div>
+    <script>
+        let board = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ];
+        let currentPlayer = 'X';
+
+        const cyberSecurityFacts = [
+            { statement: "Les mots de passe doivent être changés tous les mois.", isTrue: false },
+            { statement: "L'authentification à deux facteurs améliore la sécurité.", isTrue: true },
+            { statement: "Les virus ne peuvent pas infecter les systèmes d'exploitation Mac.", isTrue: false },
+            { statement: "Il est sûr de cliquer sur des liens dans des e-mails inconnus.", isTrue: false },
+            { statement: "Les mises à jour de logiciels sont importantes pour la sécurité.", isTrue: true }
+        ];
+
+        function makeMove(row, col) {
+            if (board[row][col] !== '') {
+                return; // Case déjà occupée
+            }
+
+            board[row][col] = currentPlayer;
+            document.querySelectorAll('td')[row * 3 + col].innerText = currentPlayer;
+
+            if (checkWin()) {
+                document.getElementById('message').innerText = "Le joueur " + currentPlayer + " a gagné !";
+                return;
+            }
+
+            if (isBoardFull()) {
+                document.getElementById('message').innerText = "Match nul !";
+                return;
+            }
+
+            displayCyberSecurityFact();
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+
+        function checkWin() {
+            // Vérifier les lignes, colonnes et diagonales
+            for (let i = 0; i < 3; i++) {
+                if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) return true;
+                if (board[0][i] && board[0][i] === board[1][i] && board[1][i] === board[2][i]) return true;
+            }
+            if (board[0][0] && board[0][0] === board[1][1] && board[1][1] === board[2][2]) return true;
+            if (board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0]) return true;
+            return false;
+        }
+
+        function isBoardFull() {
+            return board.flat().every(cell => cell !== '');
+        }
+
+        function displayCyberSecurityFact() {
+            const fact = cyberSecurityFacts[Math.floor(Math.random() * cyberSecurityFacts.length)];
+            const userAnswer = confirm(fact.statement + "\n\nCliquez sur OK pour Vrai ou Annuler pour Faux.");
+            const correctAnswer = fact.isTrue ? "Vrai" : "Faux";
+
+            if ((userAnswer && fact.isTrue) || (!userAnswer && !fact.isTrue)) {
+                alert("Bonne réponse ! C'était " + correctAnswer + ".");
+            } else {
+                alert("Mauvaise réponse ! C'était " + correctAnswer + ".");
+            }
+        }
+    </script>
+</body>
+</html>
