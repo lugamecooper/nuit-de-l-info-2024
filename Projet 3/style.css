@@ -3,175 +3,206 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #0B0190;
-  color: white;
-  font-size: 16px;
-  -webkit-touch-callout: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #0B0190;
+    color: white;
+    font-size: 16px;
+    -webkit-touch-callout: none;
 }
-body{
-  background-position: -2;
-  overflow-x: hidden;
-  overflow-y: hidden;
+
+body {
+    background-position: -2;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .ocean {
-  height: 5%;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #0801A3;
+    height: 5%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #0801A3;
 }
 
 .wave {
-  background: url('../srv/images/wave.png') repeat-x;
-  position: absolute;
-  top: -140px;
-  width: 6400px;
-  height: 198px;
-  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
-  transform: translate3d(0, 0, 0);
-  z-index: -1;
+    background: url('../srv/images/wave.png') repeat-x;
+    position: absolute;
+    top: -140px;
+    width: 6400px;
+    height: 198px;
+    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+    transform: translate3d(0, 0, 0);
+    z-index: -1;
 }
 
 .wave:nth-of-type(2) {
-  top: -175px;
-  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
-  opacity: 1;
+    top: -175px;
+    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+    opacity: 1;
 }
 
 @keyframes wave {
-  0% {
-    margin-left: 0;
-  }
-  100% {
-    margin-left: -1600px;
-  }
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: -1600px;
+    }
 }
 
 @keyframes swell {
-  0%, 100% {
-    transform: translate3d(0, -25px, 0);
-  }
-  50% {
-    transform: translate3d(0, 5px, 0);
-  }
+    0%,
+    100% {
+        transform: translate3d(0, -25px, 0);
+    }
+
+    50% {
+        transform: translate3d(0, 5px, 0);
+    }
 }
 
 .container {
-  padding: 20px;
+    padding: 20px;
 }
 
 .title-section {
-  margin-bottom: 20px;
-}
-
-.content-section {
-  display: flex;
-  justify-content: space-between;
-}
-
-.credit-box {
-  width: 50%;
-}
-
-.video-section {
-  width: 50%;
-}
-
-@keyframes retroColorShift {
-  0% {
-    background-position: 100% 0;
-  }
-  50% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
 }
 
 h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  border-bottom: 2px dotted white;
-  padding-bottom: 10px;
-  background: linear-gradient(90deg, #ff007f, #7f00ff, #00ffff, #ffff00, #ff007f);
-  background-size: 200% 100%;
-  color: transparent;
-  -webkit-background-clip: text;
-  animation: retroColorShift 6s linear infinite;
+    font-size: 2em;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    background: linear-gradient(90deg, #ff007f, #7f00ff, #00ffff, #ffff00, #ff007f);
+    background-size: 200% 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    animation: retroColorShift 6s linear infinite;
+    border-bottom: 2px dotted white;
+    flex-grow: 1;
 }
 
-.credits-list {
-  display: inline-block;
-  text-align: left;
+.title-image {
+    margin-left: 20px;
+    height: auto;
+    max-width: 80px;
 }
 
-.credit-item {
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.content-section {
+    display: flex;
+    justify-content: space-between;
 }
 
-.icon {
-  width: 30px;
-  height: 30px;
-  margin-left: 30px;
-  margin-right: 10px;
-  border-radius: 16px;
-  aspect-ratio: 1 / 1;
-}
-
-.credit-text {
-  background: linear-gradient(90deg, #FF0080, #00FF80, #FFFF00, #00FFFF, #FF0080);
-  background-size: 200% 100%;
-  color: transparent;
-  -webkit-background-clip: text;
-  animation: retroColorShift 4s linear infinite;
-}
-.team-text {
-  font-size: 1.2em;
-  margin-top: 20px;
+.credit-box {
+    width: 50%;
 }
 
 .video-section {
-  margin-top: 20px;
-  text-align: center;
+    width: 50%;
+}
+
+@keyframes retroColorShift {
+    0% {
+        background-position: 100% 0;
+        border-color: #ff007f;
+    }
+
+    25% {
+        border-color: #7f00ff;
+    }
+
+    50% {
+        background-position: 0 0;
+        border-color: #00ffff;
+    }
+
+    75% {
+        border-color: #ffff00;
+    }
+
+    100% {
+        background-position: -100% 0;
+        border-color: #ff007f;
+    }
+}
+
+.credits-list {
+    display: inline-block;
+    text-align: left;
+}
+
+.credit-item {
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+    margin-right: 10px;
+    border-radius: 16px;
+    aspect-ratio: 1 / 1;
+}
+
+.credit-text {
+    background: linear-gradient(90deg, #FF0080, #00FF80, #FFFF00, #00FFFF, #FF0080);
+    background-size: 200% 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    animation: retroColorShift 4s linear infinite;
+}
+
+.team-text {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.video-section {
+    margin-top: 20px;
+    text-align: center;
 }
 
 .video-section iframe {
-  border: 6px solid #0801A3;
-  border-radius: 6px;
-  animation: borderColorChange 15s ease infinite; /* Plus lent */
+    border: 6px solid #0801A3;
+    border-radius: 6px;
+    animation: borderColorChange 15s ease infinite;
 }
 
 @keyframes borderColorChange {
-  0% {
-    border-color: #FF0080; /* Premier couleur de bordure */
-  }
-  25% {
-    border-color: #00FF80; /* Deuxième couleur de bordure */
-  }
-  50% {
-    border-color: #FFFF00; /* Troisième couleur de bordure */
-  }
-  75% {
-    border-color: #00FFFF; /* Quatrième couleur de bordure */
-  }
-  100% {
-    border-color: #FF0080; /* Retour à la première couleur */
-  }
+    0% {
+        border-color: #FF0080;
+    }
+
+    25% {
+        border-color: #00FF80;
+    }
+
+    50% {
+        border-color: #FFFF00;
+    }
+
+    75% {
+        border-color: #00FFFF;
+    }
+
+    100% {
+        border-color: #FF0080;
+    }
 }
-
-
-
