@@ -28,12 +28,12 @@
         </div>
         <div id="coeur"><img style="position:absolute; left:825px; top:700px; max-width: 90px; max-height: 90px;" src="../src/images/coeur.png" >
         <div class="tooltip-content">
-                Here is some content for the tooltip
+                Coeur -> courants océaniques
             </div>
         </div>
         <div id="estomac"><img style="position:absolute; left:900px; top:800px; max-width: 100px; max-height: 100px;" src="../src/images/estomac.png" >
         <div class="tooltip-content">
-                Here is some content for the tooltip
+                Estomac -> abysse ou zonne profonde
             </div>
         </div>
         <div id="poumons"><img style="position:absolute; left:850px; top:520px; max-width: 200px; max-height: 200px;" src="../src/images/poumons.png" >
