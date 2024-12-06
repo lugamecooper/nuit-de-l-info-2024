@@ -6,8 +6,8 @@
     <title>Morpion - Vrai ou Faux sur la Cybersécurité</title>
     <style>
         body {
-            background-color: #121212; /* Fond sombre pour un look futuriste */
-            font-family: 'Orbitron', sans-serif; /* Police futuriste */
+            background-color: #121212;
+            font-family: 'Orbitron', sans-serif;
             text-align: center;
             color: #fff;
             margin: 0;
@@ -17,13 +17,13 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            background-image: url(/src/images/arriere-planMorpion.gif); /* Arrière-plan futuriste */
+            background-image: url(/src/images/arriere-planMorpion.gif);
             background-size: cover;
             background-position: center;
         }
 
         h1 {
-            color: #ffffff; /* Couleur néon pour le titre */
+            color: #ffffff;
             font-size: 48px;
             text-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99, 0 0 60px #00ff99;
             margin-bottom: 30px;
@@ -37,26 +37,26 @@
             margin: 20px auto;
             border-collapse: collapse;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            background-color: rgba(170, 170, 170, 0.7); /* Fond semi-transparent */
+            background-color: rgba(170, 170, 170, 0.7);
             border-radius: 10px;
         }
 
         td {
             width: 100px;
             height: 100px;
-            border: 2px solid #ffffff; /* Bordure néon */
+            border: 2px solid #ffffff;
             text-align: center;
             vertical-align: middle;
             cursor: pointer;
-            background-color: rgba(0, 255, 255, 0.1); /* Fond lumineux discret */
+            background-color: rgba(0, 255, 255, 0.1);
             transition: all 0.3s ease;
             border-radius: 10px;
         }
 
         td:hover {
-            background-color: rgba(0, 255, 255, 0.3); /* Effet de survol lumineux */
-            transform: scale(1.1); /* Agrandissement au survol */
-            box-shadow: 0 0 15px #a0a0a0; /* Ombre néon au survol */
+            background-color: rgba(0, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #a0a0a0; 
         }
 
         #message {
@@ -65,7 +65,6 @@
             text-shadow: 0 0 15px #00d0ff, 0 0 30px #00ffff;
         }
 
-        /* Style de la popup */
         .modal {
             display: none;
             position: fixed;
@@ -123,7 +122,6 @@
             box-shadow: 0 0 15px #00eaff;
         }
 
-        /* Style des images */
         .player-icon {
             width: 50px;
             height: 50px;
@@ -131,7 +129,7 @@
         }
 
         .player-icon:hover {
-            transform: rotate(15deg); /* Effet de rotation des icônes */
+            transform: rotate(15deg); 
         }
     </style>
 </head>
@@ -157,8 +155,6 @@
         </table>
         <div id="message"></div>
     </div>
-
-    <!-- Popup modale -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -178,9 +174,8 @@
         ];
         let currentPlayer = 'X';
 
-        // URL des images pour X et O (assurez-vous que ces fichiers existent)
-        const xImage = 'src/images/crabe.png'; // Remplacez par votre image pour X
-        const oImage = 'src/images/poulpe.png'; // Remplacez par votre image pour O
+        const xImage = 'src/images/crabe.png';
+        const oImage = 'src/images/poulpe.png';
 
         const cyberSecurityFacts = [
             { statement: "Les mots de passe doivent être changés tous les mois.", isTrue: false },
@@ -190,21 +185,19 @@
             { statement: "Les mises à jour de logiciels sont importantes pour la sécurité.", isTrue: true }
         ];
 
-        let currentFact = {}; // Pour stocker la question actuelle et sa réponse correcte
+        let currentFact = {};
 
-        // Ouvre la fenêtre modale avec la question
         function openModal(fact) {
-            currentFact = fact;  // Sauvegarder la question et la bonne réponse
+            currentFact = fact;
             document.getElementById('modalMessage').innerText = fact.statement;
             document.getElementById('myModal').style.display = 'block';
         }
 
-        // Ferme la fenêtre modale
+
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
         }
 
-        // Vérifie la réponse de l'utilisateur
         function checkAnswer(userAnswer) {
             const correctAnswer = currentFact.isTrue ? "Vrai" : "Faux";
             const userAnswerText = userAnswer ? "Vrai" : "Faux";
@@ -216,22 +209,20 @@
             }
         }
 
-        // Ouvre une nouvelle popup avec un message (après avoir répondu à la question)
         function openModalMessage(message) {
             document.getElementById('modalMessage').innerText = message;
             document.getElementById('myModal').style.display = 'block';
-            setTimeout(closeModal, 2000); // Ferme la popup après 2 secondes
+            setTimeout(closeModal, 2000);
         }
 
         function makeMove(row, col) {
             if (board[row][col] !== '') {
-                return; // Case déjà occupée
+                return;
             }
 
             board[row][col] = currentPlayer;
             const cell = document.querySelectorAll('td')[row * 3 + col];
 
-            // Remplacer le texte par l'image correspondante (X ou O)
             const img = document.createElement('img');
             img.src = currentPlayer === 'X' ? xImage : oImage;
             img.className = 'player-icon';
@@ -252,7 +243,6 @@
         }
 
         function checkWin() {
-            // Vérifier les lignes, colonnes et diagonales
             for (let i = 0; i < 3; i++) {
                 if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) return true;
                 if (board[0][i] && board[0][i] === board[1][i] && board[1][i] === board[2][i]) return true;
