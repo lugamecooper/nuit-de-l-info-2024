@@ -5,6 +5,35 @@
         </title>
         <link rel="stylesheet" href="./style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            const divAvant = document.getElementById("avant");
+            const divArriere = document.getElementById("arriere");
+            const divCacher = document.getElementById("cacher");
+            const container = document.getElementById("container");
+            const possiblePositions = [
+                { x: 50, y: 50 },
+                { x: 100, y: 100 },
+                { x: 150, y: 150 },
+                { x: 200, y: 200 },
+                { x: 250, y: 250 }
+            ];
+
+            function moveSquare() {
+                const randomPosition = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
+
+                divCacher.style.left = `${randomPosition.x}px`;
+                divCacher.style.top = `${randomPosition.y}px`;
+            }
+            window.addEventListener('load', () => {
+                container.style.animation = "rotation 10s ease-in-out forwards";
+            });
+
+            divCacher.addEventListener("click", () => {
+                moveSquare();
+            });
+
+            moveSquare();
+        </script>
     </head>
     <body>
         <header>
@@ -28,6 +57,8 @@
         Découvrez les fascinantes similitudes entre ces deux systèmes essentiels à la vie sur Terre.<br>
         En explorant leurs connexions, vous comprendrez l'importance cruciale de préserver l’Océan, véritable cœur bleu de notre planète.
         </p>
+        <iframe style="position: absolute; top:165px; right:0px"  width="600" height="300" src="https://www.youtube.com/embed/OoVyftQqxQw" title="Podcast Frédéric Le Moigne" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>    
+        </iframe>
         <br>
         <br>
         <img style="margin-left: 500px; z-index: -1; float:left" height="1500px" width="900" src="../src/images/corpscontour-removebg-preview.png">
