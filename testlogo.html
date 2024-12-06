@@ -33,9 +33,6 @@
             transform: rotateY(180deg); /* Tourne le verso */
         }
         #cacher {
-            width: 50px;
-            height: 50px;
-            background-color: black;
             position: absolute; /* Permet de placer l'élément à une position précise */
             cursor: pointer; /* Change le curseur quand on survole le carré */
         }
@@ -49,6 +46,12 @@
                 transform: rotateY(1800deg); /* Effectuer un seul tour de 180 degrés */
             }
         }
+
+        /* Styles pour l'image dans la div cacher */
+        #cacher img {
+            width: 50px; /* Reduit la taille de l'image */
+            height: 50px; /* Reduit la taille de l'image */
+        }
     </style>
 </head>
 <body>
@@ -57,7 +60,7 @@
         <div id="arriere"><img src="src/images/logo.jpg" alt=""></div>
     </div>
 
-    <div id="cacher"></div>
+    <div id="cacher"><img src="src/images/logolyreco.png" alt=""></div>
   
     <script>
         const divAvant = document.getElementById("avant");
