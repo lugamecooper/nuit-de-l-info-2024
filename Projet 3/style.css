@@ -19,6 +19,7 @@
 body{
   background-position: -2;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .ocean {
@@ -33,7 +34,7 @@ body{
 .wave {
   background: url('../srv/images/wave.png') repeat-x;
   position: absolute;
-  top: -198px;
+  top: -140px;
   width: 6400px;
   height: 198px;
   animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
@@ -86,11 +87,28 @@ body{
   width: 50%;
 }
 
+@keyframes retroColorShift {
+  0% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 h1 {
   font-size: 2em;
   margin-bottom: 20px;
   border-bottom: 2px dotted white;
   padding-bottom: 10px;
+  background: linear-gradient(90deg, #ff007f, #7f00ff, #00ffff, #ffff00, #ff007f);
+  background-size: 200% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  animation: retroColorShift 6s linear infinite;
 }
 
 .credits-list {
@@ -108,14 +126,19 @@ h1 {
 .icon {
   width: 30px;
   height: 30px;
+  margin-left: 30px;
   margin-right: 10px;
+  border-radius: 16px;
+  aspect-ratio: 1 / 1;
 }
 
 .credit-text {
-  flex-grow: 1;
-  font-size: 1em;
+  background: linear-gradient(90deg, #FF0080, #00FF80, #FFFF00, #00FFFF, #FF0080);
+  background-size: 200% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  animation: retroColorShift 4s linear infinite;
 }
-
 .team-text {
   font-size: 1.2em;
   margin-top: 20px;
@@ -125,3 +148,30 @@ h1 {
   margin-top: 20px;
   text-align: center;
 }
+
+.video-section iframe {
+  border: 6px solid #0801A3;
+  border-radius: 6px;
+  animation: borderColorChange 15s ease infinite; /* Plus lent */
+}
+
+@keyframes borderColorChange {
+  0% {
+    border-color: #FF0080; /* Premier couleur de bordure */
+  }
+  25% {
+    border-color: #00FF80; /* Deuxième couleur de bordure */
+  }
+  50% {
+    border-color: #FFFF00; /* Troisième couleur de bordure */
+  }
+  75% {
+    border-color: #00FFFF; /* Quatrième couleur de bordure */
+  }
+  100% {
+    border-color: #FF0080; /* Retour à la première couleur */
+  }
+}
+
+
+
