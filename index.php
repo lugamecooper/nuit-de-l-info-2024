@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-    <?php include 'header.php';?>
-
-    <?php include 'footer.php';?>
-</body>
+<html>
+    <head>
+        <title>
+            OceanQT
+        </title>
+        <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="header">
+            <img src="./src/images/drop-of-water-free-png.png">
+            <button>test</button>
+            <button>test</button>
+            <button>test</button>
+            <button>test</button>
+        </div>
+    </body>
 </html>
