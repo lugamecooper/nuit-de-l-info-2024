@@ -98,7 +98,7 @@ header {
 }
 
 .wave {
-  background: url('../srv/images/wave.png') repeat-x;
+  background: url('../src/images/wave.png') repeat-x;
   position: absolute;
   top: -120px;
   width: 6400px;
@@ -252,12 +252,21 @@ h1 {
 }
 
 .video-section {
+  width: 50%;
+  position: relative;
   margin-top: 20px;
   text-align: center;
 }
 
+.video-section .credit-text {
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
 .video-section iframe {
-  margin-top: 20px;
+  margin-top: 40px;
   border: 6px solid #0801A3;
   border-radius: 6px;
   animation: borderColorChange 15s ease infinite;
