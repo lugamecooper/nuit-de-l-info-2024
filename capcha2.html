@@ -6,17 +6,17 @@
     <title>Sandbox with Wooden Border</title>
     <style>
         body, html {
-            height: 100%; /* Assurez-vous que le body et html ont une hauteur de 100% */
-            margin: 0; /* Enlevez les marges par défaut */
+            height: 100%;
+            margin: 0;
             display: flex;
-            justify-content: center; /* Centre horizontalement */
-            align-items: center; /* Centre verticalement */
-            background-color: #f4f4f4; /* Optionnel : changer la couleur de fond de la page */
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
         }
 
         canvas {
-            border: none; /* Supprimer la bordure native */
-            box-shadow: 0 0 0 10px #8B4513; /* Ombre pour donner l'effet de bois */
+            border: none;
+            box-shadow: 0 0 0 10px #8B4513;
         }
     </style>
 </head>
@@ -25,98 +25,87 @@
 
     <script>
         const canvas = document.getElementById('bacASable');
-        const ctx = canvas.getContext('2d'); // Get 2D context to draw on the canvas
-        const elements = []; // Array to store sand grains, shells, and stones
+        const ctx = canvas.getContext('2d');
+        const elements = [];
 
-        let keyPosition = { x: 0, y: 0 }; // Position of the key
+        let keyPosition = { x: 0, y: 0 };
 
-        // Function to position the key at a random location
         function positionKeyRandomly() {
             const canvasWidth = canvas.width;
             const canvasHeight = canvas.height;
 
-            // Random position for the key
-            const keyWidth = 40; // Approximate width of the key
-            const keyHeight = 20; // Approximate height of the key
+            
+            const keyWidth = 40;
+            const keyHeight = 20;
 
             const randomX = Math.random() * (canvasWidth - keyWidth);
             const randomY = Math.random() * (canvasHeight - keyHeight);
 
-            // Update the key's position
             keyPosition = { x: randomX, y: randomY };
         }
 
-        // Function to draw the key on the canvas
         function drawKey() {
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'; // Semi-transparent red
-            ctx.fillRect(keyPosition.x, keyPosition.y, 40, 20); // Draw a rectangle as the key
-            ctx.fillStyle = 'white'; // Text color
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+            ctx.fillRect(keyPosition.x, keyPosition.y, 60, 20);
+            ctx.fillStyle = 'white';
             ctx.font = '16px Arial';
-            ctx.fillText('Key', keyPosition.x + 5, keyPosition.y + 15); // Add text inside the key
+            ctx.fillText('Verifié', keyPosition.x + 5, keyPosition.y + 15);
         }
 
-        // Function to generate sand grains, shells, and stones
         function generateElements() {
-            const numElements = 40000; // Total number of elements (grains, shells, and stones)
-            const shellChance = 0.002; // Probability of replacing a grain with a shell (0.2%)
-            const stoneChance = 0.003; // Probability of replacing a grain with a stone (0.3%)
+            const numElements = 75000;
+            const shellChance = 0.002;
+            const stoneChance = 0.003;
 
             for (let i = 0; i < numElements; i++) {
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height;
 
-                // Randomly decide if this element is a shell or a stone
                 if (Math.random() < shellChance) {
-                    const size = Math.random() * 8 + 5; // Shell size
+                    const size = Math.random() * 8 + 5;
                     elements.push({ x, y, size, type: 'shell', color: generateShellColor() });
                 } else if (Math.random() < stoneChance) {
-                    const size = Math.random() * 10 + 6; // Stone size
+                    const size = Math.random() * 10 + 6;
                     elements.push({ x, y, size, type: 'stone', color: generateStoneColor() });
                 } else {
-                    const radius = Math.random() * 2 + 1; // Grain radius
-                    const color = generateLightYellowColor(); // Light yellow shade for sand
+                    const radius = Math.random() * 2 + 1;
+                    const color = generateLightYellowColor();
                     elements.push({ x, y, radius, type: 'sand', color });
                 }
             }
         }
 
-        // Helper function to generate light yellow shades for sand
         function generateLightYellowColor() {
-            const r = 230 + Math.floor(Math.random() * 25); // Light yellow shades
-            const g = 200 + Math.floor(Math.random() * 20); // Slightly lighter green
-            const b = 0 + Math.floor(Math.random() * 20);   // Slightly warmer yellow
+            const r = 230 + Math.floor(Math.random() * 25);
+            const g = 200 + Math.floor(Math.random() * 20);
+            const b = 0 + Math.floor(Math.random() * 20);
             return `rgb(${r}, ${g}, ${b})`;
         }
 
-        // Helper function to generate shell colors
         function generateShellColor() {
-            const colors = ['#F5DEB3', '#FFF5EE', '#FFE4C4', '#FFDEAD']; // Shell-like colors
+            const colors = ['#F5DEB3', '#FFF5EE', '#FFE4C4', '#FFDEAD'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        // Helper function to generate stone colors
         function generateStoneColor() {
-            const colors = ['#A9A9A9', '#808080', '#D3D3D3']; // Stone-like colors
+            const colors = ['#A9A9A9', '#808080', '#D3D3D3'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        // Function to draw elements (sand, shells, and stones)
+
         function drawElements() {
             elements.forEach(item => {
                 if (item.type === 'sand') {
-                    // Draw a sand grain
                     ctx.beginPath();
                     ctx.arc(item.x, item.y, item.radius, 0, 2 * Math.PI);
                     ctx.fillStyle = item.color;
                     ctx.fill();
                 } else if (item.type === 'shell') {
-                    // Draw a shell (simplified arc or oval shape)
                     ctx.beginPath();
                     ctx.ellipse(item.x, item.y, item.size / 2, item.size / 3, Math.PI / 4, 0, Math.PI * 2);
                     ctx.fillStyle = item.color;
                     ctx.fill();
                 } else if (item.type === 'stone') {
-                    // Draw a stone (simplified circle or oval shape)
                     ctx.beginPath();
                     ctx.ellipse(item.x, item.y, item.size / 2, item.size / 3, 0, 0, Math.PI * 2);
                     ctx.fillStyle = item.color;
@@ -125,19 +114,18 @@
             });
         }
 
-        // Function to "push" elements (sand, shells, and stones) when the mouse moves
         function pushElements(event) {
             const mouseX = event.offsetX;
             const mouseY = event.offsetY;
 
-            const pushDistance = 5; // Distance to push the elements
+            const pushDistance = 5;
 
             elements.forEach(item => {
                 const dx = item.x - mouseX;
                 const dy = item.y - mouseY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < 50) { // Only push elements within 50px of the cursor
+                if (distance < 50) {
                     const angle = Math.atan2(dy, dx);
                     const pushX = Math.cos(angle) * pushDistance;
                     const pushY = Math.sin(angle) * pushDistance;
@@ -147,26 +135,20 @@
                 }
             });
 
-            // Redraw everything
             drawScene();
         }
 
-        // Function to draw the entire scene
         function drawScene() {
-            // Draw a light yellow background (clear sand)
-            ctx.fillStyle = 'rgb(255, 255, 200)'; // Lighter yellow for the sand background
+            ctx.fillStyle = 'rgb(255, 255, 200)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            drawKey(); // Draw the key
-            drawElements(); // Draw all the elements (sand, shells, stones)
+            drawKey(); 
+            drawElements();
         }
 
-        // Initialize the canvas with key, sand grains, shells, and stones
         positionKeyRandomly();
         generateElements();
         drawScene();
-
-        // Add event listener for mouse movements to push the elements
         canvas.addEventListener('mousemove', pushElements);
     </script>
 </body>
