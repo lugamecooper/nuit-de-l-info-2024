@@ -14,6 +14,8 @@
             <button>torse</button>
             <button>haut du corps</button>
         </div>
+        <br>
+        <br>
+        <img  style="margin-left: 40px;" height="1500px" width="900" src="./src/images/istockphoto-869005088-612x612.png">
     </body>
-    
 </html>
