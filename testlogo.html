@@ -49,8 +49,8 @@
 
         /* Styles pour l'image dans la div cacher */
         #cacher img {
-            width: 50px; /* Reduit la taille de l'image */
-            height: 50px; /* Reduit la taille de l'image */
+            width: 50px; /* Réduit la taille de l'image */
+            height: 50px; /* Réduit la taille de l'image */
         }
     </style>
 </head>
@@ -68,18 +68,23 @@
         const divCacher = document.getElementById("cacher");
         const container = document.getElementById("container");
 
-        // Définir un tableau de valeurs possibles pour les coordonnées
-        const possibleValues = [5, 50, 18, 60, 40, 35]; // Les valeurs en pixels
+        // Définir un tableau de 5 paires de coordonnées possibles pour les positions
+        const possiblePositions = [
+            { x: 50, y: 50 },
+            { x: 100, y: 100 },
+            { x: 150, y: 150 },
+            { x: 200, y: 200 },
+            { x: 250, y: 250 }
+        ];
 
-        // Déplacer le carré à une position aléatoire parmi les valeurs spécifiées
+        // Déplacer le carré à une position aléatoire parmi les positions spécifiées
         function moveSquare() {
-            // Choisir une valeur aléatoire dans le tableau possibleValues
-            const randomX = possibleValues[Math.floor(Math.random() * possibleValues.length)];
-            const randomY = possibleValues[Math.floor(Math.random() * possibleValues.length)];
+            // Choisir une position aléatoire dans le tableau possiblePositions
+            const randomPosition = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
 
             // Appliquer les nouvelles coordonnées
-            divCacher.style.left = `${randomX}px`;
-            divCacher.style.top = `${randomY}px`;
+            divCacher.style.left = `${randomPosition.x}px`;
+            divCacher.style.top = `${randomPosition.y}px`;
         }
 
         // Lancer l'animation de rotation au rechargement de la page
@@ -89,7 +94,7 @@
 
         // Déplacer le carré chaque fois que la div "cacher" est cliquée
         divCacher.addEventListener("click", () => {
-            moveSquare();  // Déplace le carré de manière aléatoire parmi les valeurs
+            moveSquare();  // Déplace le carré de manière aléatoire parmi les 5 positions
         });
 
         // Déplacer le carré dès que la page se charge, pour qu'il soit visible au départ
