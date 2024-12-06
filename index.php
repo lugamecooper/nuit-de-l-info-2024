@@ -8,11 +8,12 @@
     </head>
     <body>
         <div class="header">
-            <img src="./src/images/drop-of-water-free-png.png">
-            <button>test</button>
-            <button>test</button>
-            <button>test</button>
-            <button>test</button>
+            <a href="./"><img src="./src/images/rfwalt.png"></a>
+            <button>mini-jeux</button>
+            <button>bas du corps</button>
+            <button>torse</button>
+            <button>haut du corps</button>
         </div>
     </body>
+    
 </html>

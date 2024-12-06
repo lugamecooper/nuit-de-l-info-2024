@@ -12,9 +12,11 @@ a,button,title{
     top: 0;
     left: 0;
     position: sticky;
+    border-radius: 12px;
 }
 .header img{
     padding-left: 12px;
+    size: 20%;
 }
 .header button{
     padding: 12px;
