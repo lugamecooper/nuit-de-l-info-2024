@@ -30,27 +30,25 @@
             background-color: blue; /* Couleur du recto */
         }
         #arriere {
-            transform: rotateY(180deg); /* Tourne le verso */
+            transform: rotateY(180deg);
         }
         #cacher {
-            position: absolute; /* Permet de placer l'élément à une position précise */
-            cursor: pointer; /* Change le curseur quand on survole le carré */
+            position: absolute;
+            cursor: pointer;
         }
 
-        /* Animation pour faire tourner le conteneur une seule fois (180 degrés) */
+
         @keyframes rotation {
             0% {
                 transform: rotateY(0deg);
             }
             100% {
-                transform: rotateY(1800deg); /* Effectuer un seul tour de 180 degrés */
+                transform: rotateY(1800deg);
             }
         }
-
-        /* Styles pour l'image dans la div cacher */
         #cacher img {
-            width: 50px; /* Réduit la taille de l'image */
-            height: 50px; /* Réduit la taille de l'image */
+            width: 50px;
+            height: 50px;
         }
     </style>
 </head>
@@ -67,8 +65,6 @@
         const divArriere = document.getElementById("arriere");
         const divCacher = document.getElementById("cacher");
         const container = document.getElementById("container");
-
-        // Définir un tableau de 5 paires de coordonnées possibles pour les positions
         const possiblePositions = [
             { x: 50, y: 50 },
             { x: 100, y: 100 },
@@ -77,27 +73,20 @@
             { x: 250, y: 250 }
         ];
 
-        // Déplacer le carré à une position aléatoire parmi les positions spécifiées
         function moveSquare() {
-            // Choisir une position aléatoire dans le tableau possiblePositions
             const randomPosition = possiblePositions[Math.floor(Math.random() * possiblePositions.length)];
 
-            // Appliquer les nouvelles coordonnées
             divCacher.style.left = `${randomPosition.x}px`;
             divCacher.style.top = `${randomPosition.y}px`;
         }
-
-        // Lancer l'animation de rotation au rechargement de la page
         window.addEventListener('load', () => {
-            container.style.animation = "rotation 10s ease-in-out forwards";  // Applique l'animation de rotation (1 seul tour, 10s)
+            container.style.animation = "rotation 10s ease-in-out forwards";
         });
 
-        // Déplacer le carré chaque fois que la div "cacher" est cliquée
         divCacher.addEventListener("click", () => {
-            moveSquare();  // Déplace le carré de manière aléatoire parmi les 5 positions
+            moveSquare();
         });
 
-        // Déplacer le carré dès que la page se charge, pour qu'il soit visible au départ
         moveSquare();
     </script>
 </body>
